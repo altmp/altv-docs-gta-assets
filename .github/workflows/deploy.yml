@@ -23,11 +23,10 @@ jobs:
           ' _ {} \;
       - uses: EndBug/add-and-commit@v7
         with:
-          cwd: './deploy/'
           add: './images/'
-          # remove: 
-          #   - './github/'
-          #   - './images/'
+          remove: 
+            - './github/'
+            - './images/'
           author_name: GitHub Action
           author_email: action@github.com
           branch: deploy
