@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - shell: bash
+      - name: Generate dummies
         run: |
           mkdir "./deploy/"
           find "./images/" -type f -exec bash -c '
@@ -23,18 +23,10 @@ jobs:
           ' _ {} \;
           rm -rf "./images/"
           mv "./deploy/images/" "./images"
-      - uses: actions-js/push@master
+      - name: Deploy
+        uses: actions-js/push@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: Deploying to deploy from @ ${{ github.sha }} 🚀
           branch: deploy
           force: true
-      # - name: Commit changes
-      #   run: |
-      #     git config --local user.email "action@github.com"
-      #     git config --local user.name "GitHub Action"
-      #     git add "./index.d.ts"
-      #     git commit -m "chore: Update natives/index.d.ts" -m "Co-authored-by: $(git diff-tree ${{ github.sha }} --pretty='format:%an <%ae>' -s)"
-      # - name: Push changes
-      #   uses: ad-m/github-push-action@v0.6.0
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
