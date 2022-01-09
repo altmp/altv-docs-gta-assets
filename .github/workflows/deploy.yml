@@ -10,7 +10,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - run: |
+      - shell: bash
+        run: |
           mkdir "./deploy/"
           ls -R .
           find "./images/" -type f -exec bash -c '
