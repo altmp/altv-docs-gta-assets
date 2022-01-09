@@ -11,12 +11,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - run: |
-          # ls -R .
-          for file in ./**/*; do
-            echo "$file"
-            touch "./deploy/$file"
-          done
-          ls -R ./deploy/
+        mkdir ./deploy/
+        find "./images/" -type f -exec bash -c '
+          DEPLOY_PATH=$(dirname "./deploy/$1");
+          DEPLOY_NAME=$(basename "$1")
+          if [ ! -d $DEPLOY_PATH ]; then
+              mkdir "$DEPLOY_PATH"
+          fi
+          touch "$DEPLOY_PATH/$DEPLOY_NAME"
+        ' _ {} \;
+      - uses: EndBug/add-and-commit@v7
+        with:
+          add: './deploy/'
+          author_name: GitHub Action
+          author_email: action@github.com
+          branch: deploy
+          branch_mode: create
       # - name: Commit changes
       #   run: |
       #     git config --local user.email "action@github.com"
