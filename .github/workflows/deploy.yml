@@ -1,0 +1,24 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - run: |
+          ls -R .
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add "./index.d.ts"
+          git commit -m "chore: Update natives/index.d.ts" -m "Co-authored-by: $(git diff-tree ${{ github.sha }} --pretty='format:%an <%ae>' -s)"
+      # - name: Push changes
+      #   uses: ad-m/github-push-action@v0.6.0
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
