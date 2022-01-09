@@ -30,3 +30,11 @@ jobs:
           message: Deploying to deploy from @ ${{ github.sha }} 🚀
           branch: deploy
           force: true
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: deploy
+          publish_dir: .
+          full_commit_message: Deploying to gh-pages from @ ${{ github.sha }} 🚀
+          force_orphan: true
