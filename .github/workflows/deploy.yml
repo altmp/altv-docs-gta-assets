@@ -27,5 +27,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: deploy
           publish_dir: ./deploy
+          enable_jekyll: true
           full_commit_message: Deploying to gh-pages from @ ${{ github.sha }} 🚀
           force_orphan: true
