@@ -24,7 +24,7 @@ jobs:
       - uses: EndBug/add-and-commit@v7
         with:
           add: ./images/
-          remove: '["./github/", "./images/"]'
+          remove: '["-r ./github/", "-r ./images/"]'
           author_name: GitHub Action
           author_email: action@github.com
           branch: deploy
