@@ -21,14 +21,13 @@ jobs:
             fi
             touch "$DEPLOY_PATH/$DEPLOY_NAME"
           ' _ {} \;
-      - uses: EndBug/add-and-commit@v7
+          rm -rf "./images/"
+          mv "./deploy/images/" "./images"
+      - uses: actions-js/push@master
         with:
-          add: ./images/
-          remove: '["-r ./github/", "-r ./images/"]'
-          author_name: GitHub Action
-          author_email: action@github.com
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: deploy
-          branch_mode: create
+          force: true
       # - name: Commit changes
       #   run: |
       #     git config --local user.email "action@github.com"
