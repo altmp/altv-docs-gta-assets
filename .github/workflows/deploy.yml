@@ -21,20 +21,11 @@ jobs:
             fi
             touch "$DEPLOY_PATH/$DEPLOY_NAME"
           ' _ {} \;
-          rm -rf "./images/"
-          mv "./deploy/images/" "./images"
-      - name: Deploy
-        uses: actions-js/push@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          message: Deploying to deploy from @ ${{ github.sha }} 🚀
-          branch: deploy
-          force: true
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: deploy
-          publish_dir: .
+          publish_dir: ./deploy
           full_commit_message: Deploying to gh-pages from @ ${{ github.sha }} 🚀
           force_orphan: true
