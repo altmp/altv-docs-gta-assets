@@ -11,7 +11,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - run: |
-          mkdir ./deploy/
+          mkdir "./deploy/"
+          ls -R .
           find "./images/" -type f -exec bash -c '
             DEPLOY_PATH=$(dirname "./deploy/$1");
             DEPLOY_NAME=$(basename "$1")
