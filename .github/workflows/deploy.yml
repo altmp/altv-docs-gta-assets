@@ -14,7 +14,9 @@ jobs:
           # ls -R .
           for file in ./**/*; do
             echo "$file"
+            touch "./deploy/$file"
           done
+          ls -R ./deploy/
       # - name: Commit changes
       #   run: |
       #     git config --local user.email "action@github.com"
