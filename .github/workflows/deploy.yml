@@ -13,12 +13,11 @@ jobs:
       - shell: bash
         run: |
           mkdir "./deploy/"
-          ls -R .
           find "./images/" -type f -exec bash -c '
             DEPLOY_PATH=$(dirname "./deploy/$1");
             DEPLOY_NAME=$(basename "$1")
             if [ ! -d $DEPLOY_PATH ]; then
-                mkdir "$DEPLOY_PATH"
+                mkdir -p "$DEPLOY_PATH"
             fi
             touch "$DEPLOY_PATH/$DEPLOY_NAME"
           ' _ {} \;
