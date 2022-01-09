@@ -23,10 +23,8 @@ jobs:
           ' _ {} \;
       - uses: EndBug/add-and-commit@v7
         with:
-          add: './images/'
-          remove: 
-            - './github/'
-            - './images/'
+          add: ./images/
+          remove: '["'./github/'", "./images/"]'
           author_name: GitHub Action
           author_email: action@github.com
           branch: deploy
